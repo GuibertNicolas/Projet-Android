@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/thumbnail_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="1dp"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:id="@+id/heroInComicListName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:fontFamily="@font/starguard"
+            android:textColor="#e23636"
+            android:textSize="20dp"
+            android:padding="10dp"
+            ></TextView>
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/heroInComicListImg"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:contentDescription="@string/app_name"
+            android:gravity="center"
+            android:padding="10dp"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#A8A0A0"
+            />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</LinearLayout>
