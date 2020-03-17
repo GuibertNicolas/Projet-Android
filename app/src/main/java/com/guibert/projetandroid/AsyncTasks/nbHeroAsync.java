@@ -3,11 +3,6 @@ package com.guibert.projetandroid.AsyncTasks;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.guibert.projetandroid.Adapters.ListHeroInComicAdapter;
-import com.guibert.projetandroid.Adapters.ListHeroViewAdapter;
-import com.guibert.projetandroid.Hero;
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -17,9 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 
 public class nbHeroAsync extends AsyncTask<String, Integer, Integer> {
     private int offset;
@@ -30,7 +23,7 @@ public class nbHeroAsync extends AsyncTask<String, Integer, Integer> {
     }
     @Override
     protected Integer doInBackground(String... strings) {
-        URL url = null;
+        URL url;
         try {
             url = new URL(strings[0]+"&offset="+offset);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
@@ -40,6 +33,7 @@ public class nbHeroAsync extends AsyncTask<String, Integer, Integer> {
                 try {
                     JSONObject json = new JSONObject(s);
                     JSONObject data = json.getJSONObject("data");
+                    //nombre de héros
                     nbResults = data.getInt("total") ;
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -47,8 +41,6 @@ public class nbHeroAsync extends AsyncTask<String, Integer, Integer> {
             } finally {
                 urlConnection.disconnect();
             }
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -64,7 +56,7 @@ public class nbHeroAsync extends AsyncTask<String, Integer, Integer> {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         StringBuilder sb = new StringBuilder();
 
-        String line = null;
+        String line;
         try {
             while ((line = reader.readLine()) != null) {
                 sb.append(line).append("\n");

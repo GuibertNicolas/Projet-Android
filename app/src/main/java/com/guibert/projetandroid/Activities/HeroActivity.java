@@ -1,17 +1,14 @@
 package com.guibert.projetandroid.Activities;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -23,10 +20,10 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.LinearLayoutCompat;
 
 import com.guibert.projetandroid.Adapters.ListComicViewAdapter;
-import com.guibert.projetandroid.Data.Comic;
-import com.guibert.projetandroid.Hero;
-import com.guibert.projetandroid.R;
 import com.guibert.projetandroid.AsyncTasks.readerComicsAsync;
+import com.guibert.projetandroid.Data.Comic;
+import com.guibert.projetandroid.Data.Hero;
+import com.guibert.projetandroid.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -83,7 +80,7 @@ public class HeroActivity extends Activity {
                     } else {
                         Picasso.get().load(hero.getImg()).placeholder(R.drawable.stanleeheronotfound).into(heroImg);
                     }
-                    //création d'un bouton "more comics" à la fin de la liste
+                    //création d'un bouton "see more" à la fin de la liste
                     Button endButton = new Button(this);
                     endButton.setText(R.string.seeMore);
                     endButton.setBackgroundColor(Color.parseColor("#e23636"));
@@ -100,25 +97,24 @@ public class HeroActivity extends Activity {
                     layout.setPadding(10,10,10,10);
 
                     //Action du bouton
-                    endButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            //on lance la requête
-                            new readerComicsAsync(adaptateur, offset, progress, layout, hero.getNbComics()).execute(hero.getComicsUrl()+"?limit=100&ts=1581610808&apikey=d6d84ca8600d21e6f695f685bf539c46&hash=d365b42ecc44f34e4e5d7724de96cd60");
-                            //on incrémente offset pour les résultats suivant
-                            offset += 100;
-                            if (offset > hero.getNbComics()){
-                                layout.setVisibility(View.GONE);
-                            }
-
+                    endButton.setOnClickListener(v -> {
+                        //on lance la requête pour avoir les comics
+                        new readerComicsAsync(adaptateur, offset, progress, layout, hero.getNbComics()).execute(hero.getComicsUrl()+"?limit=100&ts=1581610808&apikey=d6d84ca8600d21e6f695f685bf539c46&hash=d365b42ecc44f34e4e5d7724de96cd60");
+                        //on incrémente offset pour avoir les résultats suivant
+                        offset += 100;
+                        //on cache le bouton une fois la tous les résultats récupérer
+                        if (offset > hero.getNbComics()){
+                            layout.setVisibility(View.GONE);
                         }
                     });
                     endButton.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
                     layout.addView(endButton);
                     layout.setVisibility(View.GONE);
+                    //on ajoute le layout uniquement si il y a plus de 100 comics
                     if (hero.getNbComics() > 100){
                         lv.addFooterView(layout);
                     }
+                    //on récupère les 100 premiers résultats
                     new readerComicsAsync(adaptateur, offset, progress, layout, hero.getNbComics()).execute(hero.getComicsUrl()+"?limit=100&ts=1581610808&apikey=d6d84ca8600d21e6f695f685bf539c46&hash=d365b42ecc44f34e4e5d7724de96cd60");
                     offset += 100;
                 }

@@ -1,9 +1,6 @@
-package com.guibert.projetandroid;
-
-import androidx.recyclerview.widget.RecyclerView;
+package com.guibert.projetandroid.Data;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class Hero implements Serializable {
 
@@ -28,16 +25,8 @@ public class Hero implements Serializable {
         return nbComics;
     }
 
-    public void setNbComics(int nbComics) {
-        this.nbComics = nbComics;
-    }
-
     public String getImg() {
         return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
     }
 
     public String getName() {
@@ -60,15 +49,8 @@ public class Hero implements Serializable {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getComicsUrl() {
         return comicsUrl;
     }
 
-    public void setComicsUrl(String comicsUrl) {
-        this.comicsUrl = comicsUrl;
-    }
 }

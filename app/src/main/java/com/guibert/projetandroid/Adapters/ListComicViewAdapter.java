@@ -13,6 +13,9 @@ import com.guibert.projetandroid.R;
 import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
+/*
+    Liste des comics dans l'activité Héro
+ */
 public class ListComicViewAdapter extends ArrayAdapter<Comic> {
     private Context c;
     public ListComicViewAdapter(Context context, ArrayList<Comic> resource) {

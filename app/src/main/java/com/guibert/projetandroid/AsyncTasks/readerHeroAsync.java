@@ -8,7 +8,7 @@ import android.widget.ProgressBar;
 
 import com.guibert.projetandroid.Adapters.ListHeroInComicAdapter;
 import com.guibert.projetandroid.Adapters.ListHeroViewAdapter;
-import com.guibert.projetandroid.Hero;
+import com.guibert.projetandroid.Data.Hero;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,20 +20,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
 public class readerHeroAsync extends AsyncTask<String, Integer, ArrayList> {
-    private ArrayList<Hero> vHero = new ArrayList<Hero>();
+    private ArrayList<Hero> vHero = new ArrayList<>();
     private int offset;
-    private boolean isHeroInComic;
+    private boolean isHeroInComic; //
     private ListHeroViewAdapter adpt;
     private ListHeroInComicAdapter adptHC;
     private ProgressBar progress;
     private LinearLayout layout;
     private int nbHeros;
 
+    //get all heros
     public readerHeroAsync(ListHeroViewAdapter adpt, int off, ProgressBar p, LinearLayout l, int c){
         this.adpt = adpt;
         this.offset = off;
@@ -41,18 +41,17 @@ public class readerHeroAsync extends AsyncTask<String, Integer, ArrayList> {
         this.layout = l;
         this.nbHeros = c;
         this.isHeroInComic = false;
-
     }
 
+    //get the heros only for one comic
     public readerHeroAsync(ListHeroInComicAdapter adpt, int off){
         this.adptHC = adpt;
         this.offset = off;
         this.isHeroInComic = true;
-       //this.progress = p;
     }
     @Override
     protected ArrayList<Hero> doInBackground(String... strings) {
-        URL url = null;
+        URL url;
             try {
                 url = new URL(strings[0]+"&offset="+offset);
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
@@ -77,7 +76,6 @@ public class readerHeroAsync extends AsyncTask<String, Integer, ArrayList> {
                             String description = results.getJSONObject(i).getString("description");
                             Hero h = new Hero(id, name, img, nbComics, description, comicsUrl);
                             vHero.add(h);
-                            //Log.i("guibert-json", id + " " + name + " " + img + " " + nbComics + "\n");
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -85,19 +83,19 @@ public class readerHeroAsync extends AsyncTask<String, Integer, ArrayList> {
                 } finally {
                     urlConnection.disconnect();
                 }
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return vHero;
+        return vHero;
     }
     @Override
     protected void onPostExecute(ArrayList results) {
+        //pour la liste des heros dans une  comics
         if (isHeroInComic) {
             for (int i = 0; i < results.size(); i++){
                 adptHC.add((Hero) results.get(i));
             }
+        //pour la liste principale
         } else {
             for (int i = 0; i < results.size(); i++){
                 adpt.add((Hero) results.get(i));
@@ -124,7 +122,7 @@ public class readerHeroAsync extends AsyncTask<String, Integer, ArrayList> {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         StringBuilder sb = new StringBuilder();
 
-        String line = null;
+        String line;
         try {
             while ((line = reader.readLine()) != null) {
                 sb.append(line).append("\n");

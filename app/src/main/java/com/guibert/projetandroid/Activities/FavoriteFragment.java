@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -79,7 +78,7 @@ public class FavoriteFragment extends Fragment {
 
     //change Color for night/light mode
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public void changeThemeColor(Boolean nightMode){
+    private void changeThemeColor(Boolean nightMode){
         if (nightMode) {
             linearLayout.setBackgroundColor(getActivity().getColor(R.color.colorBackGroundNigth));
         } else {

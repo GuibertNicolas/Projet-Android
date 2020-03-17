@@ -7,10 +7,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import androidx.annotation.Nullable;
-
 import java.util.ArrayList;
 
+/*
+    Base de données pour stocker les comics fav
+ */
 public class MyDatabase extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 2;
@@ -31,6 +32,7 @@ public class MyDatabase extends SQLiteOpenHelper {
         super(context, DATABASE_TABLE_NAME, null, DATABASE_VERSION);
     }
 
+    //création de la table comic
     @Override
     public void onCreate(SQLiteDatabase db) {
         String DATABASE_TABLE_CREATE = "CREATE TABLE " + DATABASE_TABLE_NAME + " (" +
@@ -46,6 +48,7 @@ public class MyDatabase extends SQLiteOpenHelper {
         db.execSQL(DATABASE_TABLE_CREATE);
     }
 
+    //suppression d'un comic par id
     public void deleteComic(int id) {
         SQLiteDatabase db = getWritableDatabase();
         db.beginTransaction();
@@ -56,15 +59,7 @@ public class MyDatabase extends SQLiteOpenHelper {
         db.endTransaction();
     }
 
-    public void deleteAll() {
-        SQLiteDatabase db = getWritableDatabase();
-        db.beginTransaction();
-        db.execSQL("DELETE FROM " + DATABASE_TABLE_NAME);
-        //db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_NAME);
-        db.setTransactionSuccessful();
-        db.endTransaction();
-    }
-
+    //Ajouter un comic dans la table
     public void insertData(Comic c) {
         SQLiteDatabase db = getWritableDatabase();
         db.beginTransaction();
@@ -83,9 +78,10 @@ public class MyDatabase extends SQLiteOpenHelper {
         db.endTransaction();
     }
 
+    //on répupère tous les comics
     public ArrayList<Comic> readData(){
         ArrayList<Comic> results = new ArrayList<>();
-        String select = new String("SELECT * from " + DATABASE_TABLE_NAME);
+        String select = "SELECT * from " + DATABASE_TABLE_NAME;
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery(select, null);
         Log.i("JFL", "Number of entries: " + cursor.getCount());
@@ -108,15 +104,12 @@ public class MyDatabase extends SQLiteOpenHelper {
         return results;
     }
 
+    //permet de savoir si un comic est fav avec son id
     public boolean isFav(int id){
-        String select = new String("SELECT * from " + DATABASE_TABLE_NAME + " WHERE comic.id = " + id);
+        String select = "SELECT * from " + DATABASE_TABLE_NAME + " WHERE comic.id = " + id;
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery(select, null);
-        if (cursor.getCount() == 0) {
-            return false;
-        } else {
-            return true;
-        }
+        return cursor.getCount() != 0;
     }
 
     @Override

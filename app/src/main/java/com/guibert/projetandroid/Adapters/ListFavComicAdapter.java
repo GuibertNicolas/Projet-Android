@@ -15,6 +15,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+/*
+    Liste des comics dans le fragment fav
+ */
 public class ListFavComicAdapter extends ArrayAdapter<Comic> {
     private Context c;
 

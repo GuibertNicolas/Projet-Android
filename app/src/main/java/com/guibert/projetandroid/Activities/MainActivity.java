@@ -1,5 +1,10 @@
 package com.guibert.projetandroid.Activities;
 
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.CheckBox;
+
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -7,19 +12,13 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
-import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.ImageView;
-
-
 import com.google.android.material.navigation.NavigationView;
 import com.guibert.projetandroid.R;
-import com.squareup.picasso.Picasso;
 
+/*
+    Activité principale avec le side menu, toolbar
+    on peut altérner entre les 2 fragments : LisHero et Favorite
+ */
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private Toolbar toolbar;
@@ -38,25 +37,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //checkbox pour choisir les couleurs light / night
         colorModeCb = findViewById(R.id.colorMde);
-        SharedPreferences prefs = getSharedPreferences("colorstyle", this.MODE_PRIVATE );
+        SharedPreferences prefs = getSharedPreferences("colorstyle", MODE_PRIVATE );
         mEditor = prefs.edit();
+        //on récupère le mode de couleur dans les préférences
         colorModeCb.setChecked(prefs.getBoolean("nightMode", false));
         if (colorModeCb.isChecked()){
-            colorModeCb.setText("Night Mode");
+            colorModeCb.setText(R.string.night);
         } else {
-            colorModeCb.setText("Light Mode");
+            colorModeCb.setText(R.string.light);
         }
 
-        colorModeCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                mEditor.putBoolean("nightMode", isChecked).apply();
-                if (isChecked){
-                    colorModeCb.setText("Night Mode");
-                } else {
-                    colorModeCb.setText("Light Mode");
-                }
+        colorModeCb.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            //enregistre le mode de couleur dans les prefs
+            mEditor.putBoolean("nightMode", isChecked).apply();
+            if (isChecked){
+                colorModeCb.setText(R.string.night);
+            } else {
+                colorModeCb.setText(R.string.night);
             }
         });
 
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void showHeroFragment() {
-        if (this.fragmentHero == null) this.fragmentHero = HerosFragment.newInstance();
+        if (this.fragmentHero == null) this.fragmentHero = ListHerosFragment.newInstance();
         this.startTransactionFragment(this.fragmentHero);
 
     }
@@ -146,13 +146,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     // 1 - Configure Toolbar
     private void configureToolBar(){
-        this.toolbar = (Toolbar) findViewById(R.id.activity_main_toolbar);
+        this.toolbar = findViewById(R.id.activity_main_toolbar);
         setSupportActionBar(toolbar);
     }
 
     // 2 - Configure Drawer Layout
     private void configureDrawerLayout(){
-        this.drawerLayout = (DrawerLayout) findViewById(R.id.activity_main_drawer_layout);
+        this.drawerLayout = findViewById(R.id.activity_main_drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     // 3 - Configure NavigationView
     private void configureNavigationView(){
-        this.navigationView = (NavigationView) findViewById(R.id.activity_main_nav_view);
+        this.navigationView = findViewById(R.id.activity_main_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 }

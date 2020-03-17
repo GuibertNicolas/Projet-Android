@@ -1,6 +1,5 @@
 package com.guibert.projetandroid.Data;
 
-
 import java.io.Serializable;
 
 public class Comic implements Serializable {
@@ -14,7 +13,7 @@ public class Comic implements Serializable {
     private String purchaseUrl;
     private String format;
 
-    public Comic () {};
+    public Comic () {}
 
 
     public Comic(int id, String n, String d, String u, String charact, int nbCharacters, int pages, String purchase, String f) {

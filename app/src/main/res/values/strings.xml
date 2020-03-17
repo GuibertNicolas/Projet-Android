@@ -6,7 +6,9 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="no_description">"Pas de description disponible"</string>
-    <string name="seeMore">See more comics</string>
+    <string name="seeMore">See more</string>
+    <string name="night">Night mode</string>
+    <string name="light">Light mode</string>
 
 
 </resources>

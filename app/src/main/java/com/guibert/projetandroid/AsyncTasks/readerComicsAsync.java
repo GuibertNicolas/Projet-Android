@@ -19,12 +19,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
 public class readerComicsAsync extends AsyncTask<String, Comic, ArrayList> {
-    private ArrayList<Comic> vComic = new ArrayList<Comic>();
+    private ArrayList<Comic> vComic = new ArrayList<>();
     private int offset;
     private ListComicViewAdapter adpt;
     private ProgressBar progress;
@@ -40,7 +39,7 @@ public class readerComicsAsync extends AsyncTask<String, Comic, ArrayList> {
     }
     @Override
     protected ArrayList<Comic> doInBackground(String... strings) {
-        URL url = null;
+        URL url;
         try {
             url = new URL(strings[0]+"&offset="+offset);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
@@ -76,12 +75,9 @@ public class readerComicsAsync extends AsyncTask<String, Comic, ArrayList> {
             } finally {
                 urlConnection.disconnect();
             }
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Log.i("guibert", "fin");
         return vComic;
     }
     @Override
@@ -110,7 +106,7 @@ public class readerComicsAsync extends AsyncTask<String, Comic, ArrayList> {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         StringBuilder sb = new StringBuilder();
 
-        String line = null;
+        String line;
         try {
             while ((line = reader.readLine()) != null) {
                 sb.append(line).append("\n");

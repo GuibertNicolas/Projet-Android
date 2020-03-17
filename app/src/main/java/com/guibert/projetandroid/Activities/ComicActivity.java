@@ -20,7 +20,7 @@ import com.guibert.projetandroid.Adapters.ListHeroInComicAdapter;
 import com.guibert.projetandroid.AsyncTasks.readerHeroAsync;
 import com.guibert.projetandroid.Data.Comic;
 import com.guibert.projetandroid.Data.MyDatabase;
-import com.guibert.projetandroid.Hero;
+import com.guibert.projetandroid.Data.Hero;
 import com.guibert.projetandroid.R;
 import com.squareup.picasso.Picasso;
 

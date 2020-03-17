@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.guibert.projetandroid.R;
 
-import com.guibert.projetandroid.Hero;
+import com.guibert.projetandroid.Data.Hero;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
