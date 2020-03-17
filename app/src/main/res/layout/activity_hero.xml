@@ -1,63 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/heroActLayout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HeroActivity"
+    tools:context=".Activities.HeroActivity"
     android:orientation="vertical"
-    android:layout_gravity="center"
-    android:background="#252424"
+
     >
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="wrap_content"
-        android:layout_height="260dp"
-        android:background="@drawable/marvelback"
-        android:layout_gravity="center"
-        android:orientation="vertical">
-        <de.hdodenhof.circleimageview.CircleImageView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/heroViewImg"
-            android:layout_width="231dp"
-            android:layout_height="246dp"
-            android:layout_gravity="center"
-            app:civ_border_width="4dp"
-            app:civ_border_color="#FF000000"
-            />
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="wrap_content"
+                android:layout_height="185dp"
+                android:background="@drawable/marvelback"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/heroViewImg"
+                    android:layout_width="170dp"
+                    android:layout_height="170dp"
+                    android:layout_gravity="center"
+                    app:civ_border_width="4dp"
+                    app:civ_border_color="#FF000000"
+                    android:layout_margin="5dp"
+                    />
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-    <TextView
-        android:id="@+id/heroViewName"
-        android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/heroViewName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                android:textAlignment="center"
+                android:text="TextView"
+                android:layout_gravity="center"
+                android:fontFamily="@font/starguard"
+                android:textColor="#e23636"
+                android:textSize="40dp"
+                />
+
+            <TextView
+                android:id="@+id/heroViewDSescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                android:text="Description"
+                android:textSize="15sp"
+                android:layout_gravity="center"
+                android:textColor="#A8A0A0"
+                android:justificationMode="inter_word"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </ScrollView>
+    <ProgressBar
+        android:id="@+id/simpleProgressBar"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_margin="10dp"
-        android:textAlignment="center"
-        android:text="TextView"
-        android:layout_gravity="center"
-        android:fontFamily="@font/starguard"
-        android:textColor="#e23636"
-        android:textSize="40dp"
-        />
-
-    <TextView
-        android:id="@+id/heroViewDSescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_margin="10dp"
-        android:text="Description"
-        android:textSize="15dp"
-        android:layout_gravity="center"
-        android:textColor="#A8A0A0"
-        android:justificationMode="inter_word"/>
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:padding="20dp"
+        android:indeterminate="true"/>
     <ListView
         android:id="@+id/listcomic"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:divider="#A8A0A0"
-        android:dividerHeight="3px">
+        android:dividerHeight="3sp">
     </ListView>
 </androidx.appcompat.widget.LinearLayoutCompat>

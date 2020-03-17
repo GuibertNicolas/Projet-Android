@@ -1,8 +1,9 @@
-package com.guibert.projetandroid;
+package com.guibert.projetandroid.Activities;
 
 import android.util.Log;
-import android.view.View;
 import android.widget.AbsListView;
+
+import com.guibert.projetandroid.Adapters.ListComicViewAdapter;
 
 public class ScrollListenerHero implements AbsListView.OnScrollListener {
     private int result;

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/comicActLayout"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ComicActivity"
+    tools:context=".Activities.ComicActivity"
     android:orientation="vertical"
-    android:background="#252424">
+    android:background="@color/colorBackGroundNigth">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="400dp"
@@ -30,13 +31,24 @@
             android:orientation="vertical"
             android:gravity="center">
 
+            <CheckBox
+                android:id="@+id/item_card_check_favorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:button="@drawable/cb_selector"
+                style="?android:attr/starStyle"
+                android:layout_margin="10dp"
+                />
+
             <TextView
                 android:id="@+id/comicviewFormat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="format"
                 android:textAlignment="center"
-                android:textColor="#FCFBFB"
+                android:textColor="@color/colorBackGroundLigth"
                 android:layout_margin="20dp"/>
 
             <TextView
@@ -45,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:text="pages"
                 android:textAlignment="center"
-                android:textColor="#FCFBFB"
+                android:textColor="@color/colorBackGroundLigth"
                 android:layout_margin="20dp"/>
 
             <Button
@@ -55,7 +67,7 @@
                 android:text="Buy it"
                 android:background="#e23636"
                 android:fontFamily="@font/starguard"
-                android:textColor="#FCFBFB"
+                android:textColor="@color/colorBackGroundLigth"
                 android:gravity="center"
                 android:layout_margin="20dp"
                 />
@@ -95,7 +107,6 @@
         android:id="@+id/comicViewListCharacters"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="#FCFBFB"
+        android:divider="@color/colorBackGroundLigth"
         android:dividerHeight="3dp"/>
-
 </androidx.appcompat.widget.LinearLayoutCompat>

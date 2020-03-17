@@ -1,7 +1,7 @@
-package com.guibert.projetandroid;
+package com.guibert.projetandroid.Data;
+
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class Comic implements Serializable {
     private int id;
@@ -13,6 +13,9 @@ public class Comic implements Serializable {
     private int nbPage;
     private String purchaseUrl;
     private String format;
+
+    public Comic () {};
+
 
     public Comic(int id, String n, String d, String u, String charact, int nbCharacters, int pages, String purchase, String f) {
         this.id = id;
@@ -76,6 +79,10 @@ public class Comic implements Serializable {
 
     public int getNbPage() {
         return nbPage;
+    }
+
+    public void setNbPage(int nbPage) {
+        this.nbPage = nbPage;
     }
 
     public String getFormat() {

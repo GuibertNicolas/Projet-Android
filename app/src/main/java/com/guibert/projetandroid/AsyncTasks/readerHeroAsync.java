@@ -1,8 +1,14 @@
-package com.guibert.projetandroid;
+package com.guibert.projetandroid.AsyncTasks;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.ListView;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+
+import com.guibert.projetandroid.Adapters.ListHeroInComicAdapter;
+import com.guibert.projetandroid.Adapters.ListHeroViewAdapter;
+import com.guibert.projetandroid.Hero;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,16 +30,25 @@ public class readerHeroAsync extends AsyncTask<String, Integer, ArrayList> {
     private boolean isHeroInComic;
     private ListHeroViewAdapter adpt;
     private ListHeroInComicAdapter adptHC;
-    public readerHeroAsync(ListHeroViewAdapter adpt, int off){
+    private ProgressBar progress;
+    private LinearLayout layout;
+    private int nbHeros;
+
+    public readerHeroAsync(ListHeroViewAdapter adpt, int off, ProgressBar p, LinearLayout l, int c){
         this.adpt = adpt;
         this.offset = off;
+        this.progress = p;
+        this.layout = l;
+        this.nbHeros = c;
         this.isHeroInComic = false;
+
     }
 
     public readerHeroAsync(ListHeroInComicAdapter adpt, int off){
         this.adptHC = adpt;
         this.offset = off;
         this.isHeroInComic = true;
+       //this.progress = p;
     }
     @Override
     protected ArrayList<Hero> doInBackground(String... strings) {
@@ -48,7 +63,6 @@ public class readerHeroAsync extends AsyncTask<String, Integer, ArrayList> {
                         JSONObject json = new JSONObject(s);
                         JSONObject data = json.getJSONObject("data");
                         JSONArray results = data.getJSONArray("results");
-
                         for (int i = 0; i < results.length(); i++){
                             int id = results.getJSONObject(i).getInt("id");
                             String name = results.getJSONObject(i).getString("name");
@@ -88,7 +102,22 @@ public class readerHeroAsync extends AsyncTask<String, Integer, ArrayList> {
             for (int i = 0; i < results.size(); i++){
                 adpt.add((Hero) results.get(i));
             }
+            //on cache la bar de progression
+            progress.setVisibility(View.GONE);
+            //afficher le bouton more comics i nécéssaire
+            if (offset + 100 < nbHeros) {
+                layout.setVisibility(View.VISIBLE);
+            } else {
+                layout.setVisibility(View.GONE);
+            }
         }
+    }
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        //on affiche la bar de progression
+        if (!isHeroInComic) progress.setVisibility(View.VISIBLE);
     }
 
     private static String readStream(InputStream is) {
@@ -111,5 +140,4 @@ public class readerHeroAsync extends AsyncTask<String, Integer, ArrayList> {
         }
         return sb.toString();
     }
-
 }

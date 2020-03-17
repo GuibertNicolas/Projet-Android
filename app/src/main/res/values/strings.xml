@@ -1,4 +1,12 @@
 <resources>
-    <string name="app_name">Projet Android</string>
+    <string name="app_name">Comics App</string>
     <string name="match_sport">test</string>
+    <!-- Used in NavigationDrawer -->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="no_description">"Pas de description disponible"</string>
+    <string name="seeMore">See more comics</string>
+
+
 </resources>

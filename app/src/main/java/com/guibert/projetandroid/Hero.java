@@ -1,5 +1,7 @@
 package com.guibert.projetandroid;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
